@@ -1,0 +1,45 @@
++-------------------+       +-------------------+
+|     Person        |       |     Grade         |
++-------------------+       +-------------------+
+| - name: str       |       | - score: float    |
++-------------------+       | - grade: str      |
+| + __str__()       |       +-------------------+
++-------------------+       | + __str__()       |
+       △                           △
+       | (Inheritance)             | (Aggregation)
++-------------------+       +-------------------+
+|     Student       |       |     Course        |
++-------------------+       +-------------------+
+| - ID: int         |       | - code: int       |
+| - courses_and_grades: dict| | - title: str      |
++-------------------+       | - credits: int    |
+| + enroll(Course)  |       | - teacher: Teacher|
+| + __str__()       |       +-------------------+
++-------------------+       | + __str__()       |
+       ◇                           ◆
+       | (Aggregation)             | (Aggregation)
++-------------------+       +-------------------+
+| StudentRecord     |       |     Teacher       |
++-------------------+       +-------------------+
+| - student: Student|       | - ID: int         |
+| - semester: str   |       | - courses_teaching: list|
+| - year: int       |       +-------------------+
+| - grades: dict    |       | + __str__()       |
++-------------------+       +-------------------+
+| + add_grade(Course, Grade)|
+| + calculate_gpa() |
+| + __str__()       |
++-------------------+
+
++-------------------+
+|   GradeSystem     |
++-------------------+
+| - courses: list   |
+| - students: list  |
++-------------------+
+| + add_course(Course)|
+| + remove_course(Course)|
+| + add_student(Student)|
+| + remove_student(Student)|
+| + __str__()       |
++-------------------+
