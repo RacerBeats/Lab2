@@ -9,10 +9,10 @@ class Person:
         return f"Person: {self._name}"
 
 
-class Student:
+class Student(Person):
     def __init__(self, name, student_id):
         self._student_id = student_id
-        self._name = name
+        Person.__init__(self, name) #Directly call the parent class constructor
         self._courses_and_grades = {}
 
     def get_name(self):
@@ -25,10 +25,10 @@ class Student:
         return f"Student: {self.get_name()}, ID: {self._student_id}"
 
 
-class Teacher:
+class Teacher(Person):
     def __init__(self, name, teacher_id):
         self._teacher_id = teacher_id
-        self._name = name
+        Person.__init__(self, name) #Directly call the parent class constructor
         self._courses_teaching = []
 
     def get_name(self):
