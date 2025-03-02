@@ -1,0 +1,50 @@
+class Person:
+    def __init__(self, name):
+        self._name = name
+
+    def get_name(self):
+        return self._name
+
+    def __str__(self):
+        return f"Person: {self._name}"
+
+
+class Student:
+    def __init__(self, name, student_id):
+        self._student_id = student_id
+        self._name = name
+        self._courses_and_grades = {}
+
+    def get_name(self):
+        return self._name
+
+    def enroll(self, course):
+        self._courses_and_grades[course] = None
+
+    def __str__(self):
+        return f"Student: {self.get_name()}, ID: {self._student_id}"
+
+
+class Teacher:
+    def __init__(self, name, teacher_id):
+        self._teacher_id = teacher_id
+        self._name = name
+        self._courses_teaching = []
+
+    def get_name(self):
+        return self._name
+
+    def __str__(self):
+        return f"Teacher: {self.get_name()}, ID: {self._teacher_id}"
+
+
+class Course:
+    def __init__(self, code, title, credits, teacher):
+        self._title = title
+        self._credits = credits
+        self._teacher = teacher
+        self._code = code
+        teacher._courses_teaching.append(self)
+
+    def __str__(self):
+        return f"Course: {self._title} (Code: {self._code}), Teacher: {self._teacher.get_name()}"
