@@ -68,12 +68,26 @@ class StudentRecord:
         self._student._courses_and_grades[course] = grade
 
     def calculate_gpa(self):
-        grades = [
-            grade._score
-            for grade in self._student._courses_and_grades.values()
-            if grade
-        ]
-        return sum(grades) / len(grades) if grades else 0.0
+        total_points = 0
+        total_credits = 0
+        for course, grade in self._student._courses_and_grades.items():
+            if grade: # only calculate for courses that have grades
+                score = grade._score
+                gpa_points = 0.0
+                if score >= 90:
+                    gpa_points = 4.0
+                elif  score >= 80:
+                    gpa_points = 3.0
+                elif score >= 70:
+                    gpa_points = 2.0
+                elif score >= 60:
+                    gpa_points = 1.0
+                #elseL gpa_points remains 0.0
+
+                #weight by course creds
+                total_points += gpa_points * course._credits
+                total_credits += course._credits
+        return round((total_points / total_credits), 2) if total_credits > 0 else 0.0
 
     def print_record(self):
         print(f"{self._student.get_name()}'s Record - {self._semester} {self._year}")
