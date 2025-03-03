@@ -48,3 +48,34 @@ class Course:
 
     def __str__(self):
         return f"Course: {self._title} (Code: {self._code}), Teacher: {self._teacher.get_name()}"
+
+class Grades:
+    def __init__(self, score, grade):
+        self._grade = grade
+        self._score = score
+
+    def __str__(self):
+        return f"Score: {self._score}, Grade: {self._grade}"
+
+
+class StudentRecord:
+    def __init__(self, student, semester, year):
+        self._semester = semester
+        self._student = student
+        self._year = year
+
+    def add_grade(self, course, grade):
+        self._student._courses_and_grades[course] = grade
+
+    def calculate_gpa(self):
+        grades = [
+            grade._score
+            for grade in self._student._courses_and_grades.values()
+            if grade
+        ]
+        return sum(grades) / len(grades) if grades else 0.0
+
+    def print_record(self):
+        print(f"{self._student.get_name()}'s Record - {self._semester} {self._year}")
+        for course, grade in self._student._courses_and_grades.items():
+            print(f"{course._title}: {grade}")
