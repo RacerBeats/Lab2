@@ -79,3 +79,21 @@ class StudentRecord:
         print(f"{self._student.get_name()}'s Record - {self._semester} {self._year}")
         for course, grade in self._student._courses_and_grades.items():
             print(f"{course._title}: {grade}")
+
+class GradeSystem:
+    def __init__(self):
+        self._courses = []
+        self._students = []
+
+    def add_course(self, course):
+        self._courses.append(course)
+
+    def remove_course(self, course):
+        self._courses.remove(course)
+
+    def add_student(self, student):
+        self._students.append(student)
+
+    def remove_student(self, student):
+        self._students.remove(student)
+
