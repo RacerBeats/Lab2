@@ -1,5 +1,101 @@
 from Py_Program_for_Lab_2 import Person, Student, Teacher, Course, Grades, StudentRecord, GradeSystem
 if __name__ == '__main__':
+
+    #TESTING INPUT VALIDATION
+    #inpud validation of person
+    print("testing input validation of person")
+    try:
+        x =  123.666
+        invalid_person = Person(x)
+        print("fail: no exception thrown for invalid person")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+
+    #input validation of student and teacher
+    print("testing input validation of student")
+    try:
+        invalid_student = Student("Hikaru Utada", 123)
+        print("fail: no exception thrown for invalid ID")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+    try:
+        invalid_student = Student(123, "s001")
+        print("fail: no exception thrown for invalid student")
+    except TypeError as e:
+            print(f"Error: {e}\n")
+
+    print("testing input validation of teacher")
+    try:
+        invalid_teacher = Teacher("Kanye West", 123)
+        print("fail: no exception thrown for invalid ID")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+    try:
+        invalid_teacher = Teacher(12345, "t001")
+        print("fail: no exception thrown for invalid teacher")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+
+    #input validation of course
+    print("testing input validation of course")
+    try:
+        invalid_course = Course(123, "English", 3, "Mr. Smith") #bad code
+        print("fail: no exception thrown for invalid course code")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+    try:
+        invalid_course = Course("ENG001", 123, 3, "Mr. Smith") #bad title
+        print("fail: no exception thrown for invalid course title")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+    try:
+        invalid_course = Course("ENG001", "English", "three", "Mr. Smith") #bad credits
+        print("fail: no exception thrown for invalid course credits")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+    try:
+        invalid_course = Course("ENG001", "English", 3, 123) #bad teacher
+        print("fail: no exception thrown for invalid teacher")
+    except TypeError as e:
+            print(f"Error: {e}\n")
+    try:
+        invalid_course = Course("ENG001", "English", -3, "Mr. Smith") #negative credits
+        print("pass: valid course\n")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+
+    #input validation of grades
+    print("testing input validation of grades")
+    try:
+        invalid_grade = Grades("asdf", "A") #bad score
+        print("fail: no exception thrown for invalid score")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+    try:
+        invalid_grade = Grades(123, 123) #bad grade
+        print("fail: no exception thrown for invalid grade")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+    
+    #input validation of student record
+    print("testing input validation of student record")
+    try:
+        invalid_student_record = StudentRecord(123, "Spring", 2023) #bad student
+        print("fail: no exception thrown for invalid student")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+    try:
+        student0 = Student("Post Malone", "s001")
+        invalid_student_record = StudentRecord(student0, "aaaa", 2023) #bad semester
+        print("fail: no exception thrown for invalid semester")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+    try:
+        invalid_student_record = StudentRecord(student0, "Spring", -999) #bad year
+        print("fail: no exception thrown for invalid year")
+    except TypeError as e:
+        print(f"Error: {e}\n")
+
     #test Person Class
     print("testing person class\n")
     person = Person("Tyler Okonma")
@@ -87,12 +183,11 @@ if __name__ == '__main__':
     grade_system.add_student(student2)
     grade_system.add_course(course1)
     grade_system.add_course(course2)
-    print(f"Grade System: {grade_system}")
     print(f"Number of students: {len(grade_system._students)}")
     print(f"Students in system: {[student.get_name() for student in grade_system._students]}")
     print(f"Number of courses: {len(grade_system._courses)}")
     print(f"Courses in system: {[course._title for course in grade_system._courses]}")
-    
+
     #test removal of student and course
     print("testing removal of student and course\n")
     grade_system.remove_student(student1)
@@ -105,3 +200,25 @@ if __name__ == '__main__':
 
     #test edge cases
     print("testing edge cases\n")
+
+    print("testing empty student record\n")
+    empty_record = StudentRecord(student1, "Fall", 2023)
+    print(f"Student record for {student1.get_name()}:")
+    empty_record.print_record()
+    print(f"GPA: {empty_record.calculate_gpa()}\n")
+
+    print("testing empty grade system\n")
+    empty_grade_system = GradeSystem()
+    print(f"Number of students: {len(empty_grade_system._students)}")
+    print(f"Students in system: {[student.get_name() for student in empty_grade_system._students]}")
+    print(f"Number of courses: {len(empty_grade_system._courses)}")
+    print(f"Courses in system: {[course._title for course in empty_grade_system._courses]}")
+    print("\n")
+
+    print("testing gpa with no grades\n")
+    student3 = Student("Kurt Cobain", "s003")
+    no_grade_record = StudentRecord(student3, "Fall", 2023)
+    print(f"Student record for {student3.get_name()}:")
+    no_grade_record.print_record()
+    print(f"GPA: {no_grade_record.calculate_gpa()}\n")
+
